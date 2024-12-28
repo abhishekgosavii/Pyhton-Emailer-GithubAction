@@ -1,4 +1,4 @@
-name: "Send email after workflow"
+name: "Send email after workflow" 
 
 on:
     workflow_dispatch:
@@ -8,21 +8,21 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v2      #Clone the code 
             
             - name: "Setup python env"
               uses: actions/setup-python@v2 
               with:
-                  python-version: '3.x'
+                  python-version: '3.x'         #setup python 3.x
 
             - name: "Install dependencies"
               run: |
-                python -m pip install --upgrade pip
+                python -m pip install --upgrade pip      #setup pip (an python library)
             
             - name: "Send mail by executing python script"
-              run: python script.py 
+              run: python script.py                            # run out py script
               env: 
-                WORKFLOW_NAME: ${{ github.workflow }}
+                WORKFLOW_NAME: ${{ github.workflow }}          #this is environment variables , where github is th econtext objects which gives all the below secrets like password , email and etc
                 REPO_NAME: ${{ github.repository }}
                 WORKFLOW_RUN_ID: ${{ github.run_id }}
                 SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
